@@ -31,41 +31,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.xsensory_canary.ui.theme.XSensory_CanaryTheme
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            XSensory_CanaryTheme {
-                // A surface container using the 'background' color from the theme
-                Column(
-                    modifier = Modifier
-                        .background(MaterialTheme.colorScheme.background)
-                        .padding(16.dp)
-                        .fillMaxSize(),
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    MessageCard()
-                    SendButton {
-
-                    }
-                    ReceiveButton {
-
-                    }
-                    LoggerCard()
-                }
-            }
-        }
-    }
-}
-
+// UI Part
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MessageCard() {
     var text by remember { mutableStateOf("") }
+
     TextField(
         value = text,
-        onValueChange = { text = it },
+        onValueChange = {
+            text = it
+        },
         modifier= Modifier
             .clip(shape = RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.secondaryContainer)
@@ -107,7 +83,7 @@ fun LoggerCard() {
 
     ) {
         Text(
-            text = "Hello World K2E7 This Side \nJust a Programmer for Fun.",
+            text = "",
             modifier = Modifier
                 .padding(20.dp)
         )
@@ -115,9 +91,39 @@ fun LoggerCard() {
 
 }
 
+class MainActivity : ComponentActivity() {
+    private var messageText: String = ""
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            XSensory_CanaryTheme {
+                // A surface container using the 'background' color from the theme
+                Column(
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.background)
+                        .padding(16.dp)
+                        .fillMaxSize(),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    MessageCard()
+                    SendButton {
+
+                    }
+                    ReceiveButton {
+
+                    }
+                    LoggerCard()
+                }
+            }
+        }
+    }
+}
+
+
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun ChatPreview() {
     XSensory_CanaryTheme {
         // A surface container using the 'background' color from the theme
         Column(
